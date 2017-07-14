@@ -1,0 +1,28 @@
+.header {
+background-color: powderblue;
+}
+.fahead {
+    font-size:20px; color: white;
+}
+.iconpage {
+    width: 160px; height: 70px;
+}
+.slider {
+    width:50%;
+}
+.topnews {
+    margin: 20px 60px;
+    border: solid 1px; 
+    padding: 20px 20px 0px;
+}
+.imgslide {
+    width: 400px;
+    height: auto;
+}
+.rowpost1 {
+    padding-top: 10px;
+}
+.rowpost2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
