@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myModule">
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
+    <title>Admin Post</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/style/Admin.css">
 </head>
@@ -47,10 +46,10 @@
                 <a href="" class="side-bar"><span class="fa fa-tachometer"> Settings</span></a>
             </div>
             <div class=" col-md-10 ">
-
-                <div class=" col-md-12">
-                    <h1>Post <button type="button" class="btn btn-primary">Add new</button></h1>
-
+                <div class="row">
+                    <div class=" col-md-12">
+                        <h1>Post <button type="button" class="btn btn-primary">Add new</button></h1>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -74,58 +73,18 @@
                     </div>
                 </div>
                 <br>
-                <table class="table table-striped">
-                    <thead>
-                        <tr class="info">
-                            <th><input type="checkbox" value=""></th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><input type="checkbox" value=""></th>
-                            <td>Tiêm phòng vacxin cho thú cưng và những điều lưu ý cần thiết </td>
-                            <td>VietDVM team</td>
-                            <td>Tin tổng hợp</td>
-                        </tr>
-                        <tr>
-                            <th><input type="checkbox" value=""></th>
-                            <td>Những chú chó nổi tiếng và tuyệt vời nhất trong lịch sử thế giới </td>
-                            <td>YouTube</td>
-                            <td>Video clip</td>
-                        </tr>
-                        <tr>
-                            <th><input type="checkbox" value=""></th>
-                            <td>Rex – chú chó thám tử mãi sống trong lòng thế hệ 8x, 9x</td>
-                            <td>Trí Thức Trẻ</td>
-                            <td>Tin tổng hợp</td>
-                        </tr>
-                        <tr>
-                            <th><input type="checkbox" value=" "></th>
-                            <td>Chihuahua (chó)</td>
-                            <td>Wikipedia</td>
-                            <td>Tham khảo</td>
-                        </tr>
-                        <tr>
-                            <th><input type="checkbox" value=" "></th>
-                            <td>Cầy tơ sáu món</td>
-                            <td>Chú chín thịt chó</td>
-                            <td>Bài viết được tài trợ</td>
-                        </tr>
-                        <tr>
-                            <th><input type="checkbox" value=" "></th>
-                            <td>Tom và Jerry, 10 năm nhìn lại</td>
-                            <td>Tom Hank</td>
-                            <td>Bài dịch</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="width:98%" text-angular ng-model="htmlVariable"></div>
             </div>
         </div>
     </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
+<script src='/Script/men.js'></script>
 
 </html>

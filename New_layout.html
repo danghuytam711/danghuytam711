@@ -15,14 +15,55 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="My_style.css">
+    <link rel="stylesheet" type="text/css" href="/style/My_style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="row header">
             <div class="col-md-6 text-left">
-                <a href="">Sign in</a> |
+                <!-- Modal Signin -->
+                <a href="" data-toggle="modal" data-target="#myModal">Sign in </a> |
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Sign in</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="panel-body">
+                                    <form accept-charset="UTF-8" role="form">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="ahkinh@abc.com" name="email" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="password" name="password" type="password" value="">
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+			    	    		<input name="remember" type="checkbox" value="Save password"> Save password
+			    	    	</label>
+                                            </div>
+                                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Sign in">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- End Modal Signin -->
                 <a href="">About</a> |
                 <a href="">Contact</a> |
             </div>
@@ -33,14 +74,14 @@
                 <a href=""><i class="fa fa-youtube-play fahead"></i></a>
             </div>
         </div>
-        <div class="row">
+        <div class="row headercenter">
 
             <a href=""><img class="iconpage" src="https://s-media-cache-ak0.pinimg.com/originals/23/b6/8e/23b68e58578bc1458c4a742dd445c67d.png"></a>
-            <a href="">Home</a>
-            <a href="">Dog lover</a>
-            <a href="">Cat lover</a>
-            <a href="">Picture</a>
-            <a href="">Video</a>
+            <a href="">Home</a> /
+            <a href="">Dog lover</a> /
+            <a href="">Cat lover</a> /
+            <a href="">Picture</a> /
+            <a href="">Video</a> /
             <a href="">More</a>
 
         </div>
@@ -140,7 +181,7 @@
         <!-- End top news -->
         <!-- Post Articles -->
         <div class="row">
-            <div class="col-md-8 col-lg-8 col-lg-8">
+            <div class="col-md-8">
                 <h4><span class="themeblack">Pet lover</span></h4>
                 <div class="media">
                     <div class="media-left">
@@ -216,7 +257,7 @@
                 <h4><span class="themeblack">Quote of the day</span></h4>
 
 
-                <blockquote class="quote-box">
+                <blockquote class="quote-box img-responsive">
                     <p class="quotation-mark">
                         “
                     </p>

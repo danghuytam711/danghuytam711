@@ -1,0 +1,50 @@
+.sidebar {
+    background-color: powderblue;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.sidebar a:hover {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 5px grey;
+}
+
+.sidebar a:hover:active {
+    background-color: white;
+    box-shadow: 0 10px #666;
+    transform: translateY(4px);
+    color: #024c68;
+}
+
+.sidebar a:last-child:hover {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+a.side-bar {
+    display: block;
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+    align-content: center;
+}
+
+.navbar {
+    background-color: #024c68;
+}
+
+.ta-scroll-window {
+    height: auto;
+    min-height: 400px;
+}
+
+.ta-bind {
+    height: auto;
+    min-height: 400px;
+}
+
+.ta-hidden-input {
+    display: none;
+}
