@@ -5,11 +5,11 @@
 	    $routeProvider
 	    // route 
 	        .when('/', {
-	            templateUrl: '/View/view_homepage.html',
+	            templateUrl: '/view/view_homepage.html',
 	            controller: 'mainController'
 	        })
 	        .when('/post', {
-	            templateUrl: '/View/view_post.html',
+	            templateUrl: '/view/view_post.html',
 	            controller: 'mainController'
 	        })
 	});
