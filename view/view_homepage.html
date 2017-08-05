@@ -1,0 +1,18 @@
+<div ng-init="apiGetArts()">
+    <div ng-repeat="art in articles" class="media">
+        <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
+
+        <div class="media-left">
+            <a href="#/post?id={{art._id}}"><img ng-src="{{art.media}}" class="media-object imgpage"></a>
+        </div>
+        <div class="media-body">
+            <a href="#post?id={{art._id}}">
+                <h2 class="media-heading">{{art.title}}</h2>
+            </a>
+            <a href="" class="author">{{art._author.name}}</a>
+            <time>{{art.createdDate}}}</time>
+            <p class="textdemo">{{art.description}}</p>
+            <a href="#/post?id={{art._id}}"><button type="button" class="btn btnblack" ng-click="apiGetArt(art._id)">Read more</button></a>
+        </div>
+    </div>
+</div>
