@@ -169,3 +169,8 @@ blockquote {
 .headercenter {
     text-align: center;
 }
+
+.imgpage {
+    width: 300px;
+    height: 220px;
+}

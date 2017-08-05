@@ -1,49 +1,74 @@
-	// create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['ngRoute']);
-
+	//
+	var app = angular.module('app', ['ngRoute']);
 	// configure our routes
-	scotchApp.config(function($routeProvider) {
+	app.config(function($routeProvider) {
 	    $routeProvider
-
-	    // route for the home page
+	    // route 
 	        .when('/', {
-	        templateUrl: '/For_post.html',
-	        controller: 'mainController'
-	    })
-
-	    // route for the about page
-	    .when('/about', {
-	        templateUrl: 'pages/about.html',
-	        controller: 'aboutController'
-	    })
-
-	    // route for the contact page
-	    .when('/contact', {
-	        templateUrl: 'pages/contact.html',
-	        controller: 'contactController'
-	    });
+	            templateUrl: '/View/view_homepage.html',
+	            controller: 'mainController'
+	        })
+	        .when('/post', {
+	            templateUrl: '/View/view_post.html',
+	            controller: 'mainController'
+	        })
 	});
 
-
-
-	var app = angular.module("scotchApp", []);
-	app.controller("mainController", function($scope, $http) {
+	app.controller("mainController", function($scope, $http, $location) {
 	    var root = "https://green-web-blog.herokuapp.com";
-	    var apiGetArticles = function() {
-	        $http.get(root + '/api/articles')
+
+	    $scope.apiGetCat = function() {
+	        $http.get(root + "/api/categories")
 	            .then(function(response) {
-	                $scope.articles = response.datda;
+	                $scope.categories = response.data;
 	            });
 	    };
-	    var apiGetCategories = function() {
-	        $http.get(root + '/api/categories')
+
+	    $scope.apiGetArts = function() {
+	        $http.get(root + "/api/articles")
 	            .then(function(response) {
-	                $scope.categories = response.datda;
+	                $scope.articles = response.data;
 	            });
 	    };
-	    var init = function() {
-	        apiGetArticles();
-	        apiGetCategories();
+
+	    $scope.apiGetArt = function() {
+	        $http.get(root + "/api/articles")
+	            .then(function(response) {
+	                $scope.articles = response.data;
+	                var id = $location.search().id;
+	                for (i = 0; i < $scope.articles.length; ++i) {
+	                    if ($scope.articles[i]._id == id) {
+	                        $scope.art = $scope.articles[i];
+	                    }
+	                }
+	            });
+	    }
+
+	    $scope.getCatNameOfArt = function(id) {
+	        if (undefined != $scope.categories) {
+	            for (i = 0; i < $scope.categories.length; i++) {
+	                var cat = $scope.categories[i];
+	                if (cat._id == id) {
+	                    return cat.name;
+	                }
+	            }
+	        };
+	    }
+
+
+
+	    $scope.login = function() {
+	        $http.post(root + '/api/users/auth', $scope.user)
+	            .success(function(response) {
+	                var isSuccess = response.success;
+	                if (isSuccess) {
+	                    console.log(response);
+	                } else {
+
+	                    alert(response.message);
+	                }
+	            }).error(function(data, status, headers, config) {
+	                console.log(data, status, headers, config);
+	            });
 	    };
-	    init();
 	});
