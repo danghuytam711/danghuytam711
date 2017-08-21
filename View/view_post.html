@@ -1,11 +1,9 @@
-<div ng-init="apiGetArt()">
+<div class="container" ng-init="apiGetArt()">
     <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
     <h2>{{art.title}}</h2>
     <small><i>By</i></small>
-    <a href=""><b> Tom Kay</b></a>
-    <time datetime="">- 05/09/2017</time> &nbsp&nbsp
-    <i class="fa fa-eye"> 711</i>
-    <i class="fa fa-comments-o"> 59</i>
+    <a href=""><b>{{art._author.name}}</b></a>
+    <time datetime="">- {{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time> &nbsp&nbsp
     <div class="row">
         <div class="col-md-12">
             <i>Share</i>
@@ -16,10 +14,9 @@
     <br>
     <div class="row">
         <div class="col-md-12">
-            <img ng-src="{{art.media}}" class="img-responsive imgpost" src="http://via.placeholder.com/800x200">
+            <img ng-src="{{art.media}}" class="img-responsive imgpost">
             <br>
-            <p style="text-align:justify">
-                {{art.content}}
+            <p ng-bind-html="art.content">
             </p>
         </div>
     </div>

@@ -1,18 +1,151 @@
-<div ng-init="apiGetArts()">
-    <div ng-repeat="art in articles" class="media">
-        <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
-
-        <div class="media-left">
-            <a href="#/post?id={{art._id}}"><img ng-src="{{art.media}}" class="media-object imgpage"></a>
-        </div>
-        <div class="media-body">
-            <a href="#post?id={{art._id}}">
-                <h2 class="media-heading">{{art.title}}</h2>
+<div class="container topnews">
+    <div class="row">
+        <div class="col-md-4 imgstyle">
+            <a href="#post">
+                <img src="http://via.placeholder.com/800x500" class="img-responsive">
+                <h2>Introduce a Dog and Cat</h2>
             </a>
-            <a href="" class="author">{{art._author.name}}</a>
-            <time>{{art.createdDate}}}</time>
-            <p class="textdemo">{{art.description}}</p>
-            <a href="#/post?id={{art._id}}"><button type="button" class="btn btnblack" ng-click="apiGetArt(art._id)">Read more</button></a>
+            <a href="">
+            Tom Jerry
+        </a>
+            <time>05/07/2017</time>
+        </div>
+        <div class="col-md-4 imgstyle">
+            <a href="#post">
+                <img src="http://via.placeholder.com/800x500" class="img-responsive">
+                <h2>Who let the dog out?</h2>
+            </a>
+            <a href="">
+            Tom May
+        </a>
+            <time>03/04/2017</time>
+        </div>
+        <div class="col-md-4 imgstyle">
+            <a href="#post">
+                <img src="http://via.placeholder.com/800x500" class="img-responsive">
+                <h2>Go, doggie, go!</h2>
+            </a>
+            <a href="">
+            Tom Kay
+        </a>
+            <time>05/07/2017</time>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8" ng-init="apiGetArts()">
+            <div ng-repeat="art in articles" class="media">
+                <h4 ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></h4>
+
+                <div class="media-left imgstyle">
+                    <a href="#!/post?id={{art._id}}"><img ng-src="{{art.media}}" class="media-object imgpage"></a>
+                </div>
+                <div class="media-body">
+                    <a href="#!/post?id={{art._id}}">
+                        <h4 class="media-heading">{{art.title}}</h4>
+                    </a>
+                    <a href="" class="author">{{art._author.name}}</a>
+                    <i><time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time></i>
+                    <p class="textdemo">{{art.description}}</p>
+                    <a href="#!/post?id={{art._id}}"><button type="button" class="btn btnblack" ng-click="apiGetArt(art._id)">Read more</button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Quotes -->
+            <h4><span class="themeblue">Phát ngôn gây sốc</span></h4>
+
+
+            <blockquote class="quote-box img-responsive">
+                <p class="quotation-mark">
+                    “
+                </p>
+                <p class="quote-text">
+                    VAT 12%.
+                </p>
+                <hr>
+                <div class="blog-post-actions">
+                    <p class="blog-post-bottom pull-left">
+                        Phuc
+                    </p>
+                    <p class="blog-post-bottom pull-right">
+                        <span class="badge quote-badge">711</span>  ❤
+                    </p>
+                </div>
+            </blockquote>
+
+
+            <!-- End quotes -->
+            <!-- Fact -->
+            <h4><span class="themeblue">Tin nóng</span></h4>
+            <div class="media" ng-init="apiGetArts()" ng-repeat="art in articles">
+
+                <div class="media-body">
+                    <a href="#post?id={{art._id}}">
+                        <h4 class="media-heading">{{art.title}}</h4>
+                    </a>
+                    <time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a href="">
+                <div class="smallboxparent">
+                    <img class="img-responsive imgcontrol" src="http://via.placeholder.com/400x300" alt="img">
+                    <span class="smallbox themeblue">Fact</span>
+                </div>
+                <h2>What is Lorem Ipsum? This is post near footer</h2>
+            </a>
+            <a href="">
+                <b>Tom Kay</b>
+            </a>
+            <time> - 05/09/2017</time>
+        </div>
+        <div class="col-md-4">
+
+            <a href="">
+                <div class="smallboxparent">
+                    <img class="img-responsive imgcontrol" src="http://via.placeholder.com/400x300" alt="img">
+                    <span class="smallbox themeblue">Fact</span>
+                </div>
+                <h2>What is Lorem Ipsum? This is post near footer</h2>
+            </a>
+            <a href="">
+                <b>Tom Kay</b>
+            </a>
+            <time> - 05/09/2017</time>
+
+        </div>
+        <div class="col-md-4">
+            <a href="">
+                <div class="smallboxparent">
+                    <img class="img-responsive imgcontrol" src="http://via.placeholder.com/400x300" alt="img">
+                    <span class="smallbox themeblue">Fact</span>
+                </div>
+                <h2>What is Lorem Ipsum? This is post near footer</h2>
+            </a>
+            <a href="">
+                <b>Tom Kay</b>
+            </a>
+            <time> - 05/09/2017</time>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12  pagectrl">
+            <ul class="pagination pagination-sm">
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+            </ul>
         </div>
     </div>
 </div>

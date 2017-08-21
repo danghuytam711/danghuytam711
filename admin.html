@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">">
+    <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.min.css">
+    <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css">
+    <link rel='stylesheet' href='/bower_components/textAngular/dist/textAngular.css'>
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="Style/Admin.css">
 </head>
 
-<body ng-app="app" ng-controller="mainController">
+<body ng-controller="mainController">
     <div class="container">
         <div class="row">
 
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-wrench"></span></a>
+                        <a class="navbar-brand" href="/index.html"><span class="fa fa-home"></span></a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#"><span class="glyphicon glyphicon-home" style="color: powderblue"></span> &nbspHome</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-comment" style="color: powderblue"></span> &nbsp12</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-plus" style="color: powderblue"></span> &nbspNew</a></li>
+                        <li class="active"><a href="/admin.html"><span class="fa fa-dashboard" style="color: powderblue"></span> &nbspMain</a></li>
+                        <li><a href="/admin_post.html"><span class="glyphicon glyphicon-plus" style="color: powderblue"></span> &nbspNew</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> User admin</a></li>
@@ -35,30 +38,21 @@
 
         <div class="row">
             <div class="col-md-2 sidebar">
-                <a href="" class="side-bar"><span class="fa fa-cogs"> Dashboard</span></a>
-                <a href="#!post" class="side-bar"><span class="fa fa-pencil-square-o"> Posts</span></a>
-                <a href="" class="side-bar"><span class="fa fa-television"> Media</span></a>
-                <a href="" class="side-bar"><span class="fa fa-clone"> Pages</span></a>
-                <a href="" class="side-bar"><span class="fa fa-camera-retro"> Appearance</span></a>
-                <a href="" class="side-bar"><span class="fa fa-plug"> Plugins</span></a>
-                <a href="" class="side-bar"><span class="fa fa-male"> Users</span></a>
-                <a href="" class="side-bar"><span class="fa fa-suitcase"> Tools</span></a>
-                <a href="" class="side-bar"><span class="fa fa-tachometer"> Settings</span></a>
+                <a href="/admin.html" class="side-bar"><span class="fa fa-cogs"> Posts</span></a>
+                <a href="/admin_post.html" class="side-bar"><span class="fa fa-pencil-square-o"> Add Post</span></a>
+                <a href="/admin_cat.html" class="side-bar"><span class="fa fa-clone"> Cats</span></a>
+                <a href="/admin_new_cat.html" class="side-bar"><span class="fa fa-television"> Add Cat</span></a>
             </div>
             <div class=" col-md-10">
 
-                <div class=" col-md-12">
-                    <h1>Post
-                        <a href="admin_post.html"> <button type="button" class="btn btn-primary">Add new</button></a>
-                    </h1>
 
-                </div>
+                <h1>Post</h1>
+
+
                 <div class="row">
                     <div ng-init="apiGetArts()" class="col-md-6">
                         <p>
-                            <a href="#">All<span class="count"> ({{articles.length}})</span></a> |
-                            <a href="">Published (11)</a> |
-                            <a href="">Drafts (1)</a>
+                            <a href="#">All<span class="count"> ({{articles.length}})</span></a>
                         </p>
                     </div>
                     <div class="col-md-6">
@@ -83,21 +77,19 @@
                             <th>Author</th>
                             <th>Category</th>
                             <th>Date</th>
-                            <th>Update</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody ng-init="apiGetCat()">
                         <tr ng-repeat="art in articles">
                             <th><input type="checkbox" value=""></th>
                             <td>{{art.title}}</td>
                             <td>{{art._author.name}}</td>
-                            <td>{{}}</td>
-                            <td>{{art.createdDate}}</td>
-                            <td>{{art.updatedDate}}</td>
+                            <td>{{getCatNameOfArt(art._category._id)}}</td>
+                            <td>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</td>
                             <td>
-                                <a href=""><span class="label label-primary">Edit</span></a>
-                                <a href=""><span class="label label-danger">Delete</span></a>
+                                <a href="" data-toggle="modal" data-target="#edit" ng-click="apiGetArt(art._id)"><span class="label label-primary">Edit</span></a>
+                                <a href="" data-toggle="modal" data-target="#delete" ng-click="getArticleID(art._id)"><span class="label label-danger">Delete</span></a>
                             </td>
 
                         </tr>
@@ -108,20 +100,102 @@
         </div>
     </div>
     </div>
+
+    <div class="modal fade" id="delete" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <form ng-submit="deleteArticle()" accept-charset="UTF-8" role="form">
+                            <button type="submit" class="btn btn-danger">Confirm</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="edit" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit article</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <form ng-submit="submitCreateArticle()">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" class="form-control" ng-model="newArticle.title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label>Author</label>
+                                <input type="text" class="form-control" value="{{user._id}}" placeholder="Author ID">
+                            </div>
+                            <div ng-init="apiGetCat()" class="form-group">
+                                <label>Category</label></br>
+                                <select ng-model="newArticle._category" ng-required="true" class="form-control" ng-options="category as category.name for category in categories track by category._id" />
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Short Description</label>
+                                <textarea class="form-control" ng-model="newArticle.description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Full Description</label>
+                                <text-angular ng-model="newArticle.content"></text-angular>
+                            </div>
+                            <div class="form-group">
+                                <label>Media</label>
+                                <input type="text" class="form-control" ng-model="newArticle.media" placeholder="Image, Youtube Link...">
+                            </div>
+                            <div class="form-group">
+                                <label>Tags</label>
+                                <tags-input use-strings="true" height='30px' ng-model="newArticle.tags"></tags-input>
+                            </div>
+                            <button ng-click="updateArticle()" class="btn btn-primary" type="submit">Update</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.min.js"></script>
+<script src="/bower_components/ng-tags-input/ng-tags-input.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
+<script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+<script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 
 <script src='/Script/script.js'></script>
+
 
 
 </html>
