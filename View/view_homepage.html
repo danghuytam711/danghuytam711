@@ -1,55 +1,22 @@
 <div class="container topnews">
-    <div class="row">
-        <div class="col-md-4 imgstyle">
-            <a href="#post">
-                <img src="http://via.placeholder.com/800x500" class="img-responsive">
-                <h2>Introduce a Dog and Cat</h2>
-            </a>
-            <a href="">
-            Tom Jerry
-        </a>
-            <time>05/07/2017</time>
-        </div>
-        <div class="col-md-4 imgstyle">
-            <a href="#post">
-                <img src="http://via.placeholder.com/800x500" class="img-responsive">
-                <h2>Who let the dog out?</h2>
-            </a>
-            <a href="">
-            Tom May
-        </a>
-            <time>03/04/2017</time>
-        </div>
-        <div class="col-md-4 imgstyle">
-            <a href="#post">
-                <img src="http://via.placeholder.com/800x500" class="img-responsive">
-                <h2>Go, doggie, go!</h2>
-            </a>
-            <a href="">
-            Tom Kay
-        </a>
-            <time>05/07/2017</time>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-md-8" ng-init="apiGetArts()">
-            <div ng-repeat="art in articles" class="media">
-                <h4 ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></h4>
-
-                <div class="media-left imgstyle">
-                    <a href="#!/post?id={{art._id}}"><img ng-src="{{art.media}}" class="media-object imgpage"></a>
-                </div>
-                <div class="media-body">
-                    <a href="#!/post?id={{art._id}}">
-                        <h4 class="media-heading">{{art.title}}</h4>
-                    </a>
-                    <a href="" class="author">{{art._author.name}}</a>
+            <div ng-repeat="art in articles">
+                <div class="news">
+                    <h2 class="media-heading"> <a href="#!/post?id={{art._id}}">{{art.title}}</a></h2>
+                    <a ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></a>
+                    <a href="">By <b>{{art._author.name}}</b></a>
                     <i><time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time></i>
-                    <p class="textdemo">{{art.description}}</p>
-                    <a href="#!/post?id={{art._id}}"><button type="button" class="btn btnblack" ng-click="apiGetArt(art._id)">Read more</button></a>
                 </div>
+                <div class="thumbnail">
+                    <a href="#!/post?id={{art._id}}"><img ng-src="{{art.media}}" class="portrait"></a>
+                </div>
+                <p class="textdemo">{{art.description}}</p>
+                <a href="#!/post?id={{art._id}}" class="btnblack" ng-click="apiGetArt(art._id)">Đọc tiếp</a>
+                <div class="line"></div>
             </div>
+
         </div>
 
         <div class="col-md-4">
@@ -79,14 +46,16 @@
             <!-- End quotes -->
             <!-- Fact -->
             <h4><span class="themeblue">Tin nóng</span></h4>
-            <div class="media" ng-init="apiGetArts()" ng-repeat="art in articles">
-
-                <div class="media-body">
-                    <a href="#post?id={{art._id}}">
-                        <h4 class="media-heading">{{art.title}}</h4>
-                    </a>
-                    <time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+            <div class="media" ng-init="apiGetArts()">
+                <div ng-repeat="art in articles">
+                    <div class="media-body">
+                        <a href="#post?id={{art._id}}">
+                            <h4 class="media-heading">{{art.title}}</h4>
+                        </a>
+                        <time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+                    </div>
                 </div>
+
             </div>
 
         </div>

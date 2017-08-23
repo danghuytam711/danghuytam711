@@ -1,5 +1,5 @@
 	//
-	var app = angular.module('app', ['ngRoute', 'ngTagsInput', 'textAngular', 'ui.bootstrap']);
+	var app = angular.module('app', ['ngRoute', 'ngTagsInput', 'textAngular', ]);
 	// configure our routes
 	app.config(function($routeProvider) {
 	    $routeProvider
