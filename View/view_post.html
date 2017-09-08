@@ -1,56 +1,93 @@
 <div class="container" ng-init="apiGetArt()">
-    <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
-    <h2>{{art.title}}</h2>
-    <small><i>By</i></small>
-    <a href=""><b>{{art._author.name}}</b></a>
-    <time datetime="">- {{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time> &nbsp&nbsp
     <div class="row">
-        <div class="col-md-12">
-            <i>Share</i>
-            <button type="button" class="btn btn-primary fa fa-facebook" style="font-size:100%"></button>
-            <button type="button" class="btn btn-danger fa fa-google-plus" style="font-size:100%"></button>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <img ng-src="{{art.media}}" class="img-responsive imgpost">
+        <div class="col-md-8">
+
+            <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
+            <h2>{{art.title}}</h2>
+            <small><i>By</i></small>
+            <a href=""><b>{{art._author.name}}</b></a>
+            <time datetime="">- {{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time> &nbsp&nbsp
+            <div class="row">
+                <div class="col-md-12">
+                    <i>Share</i>
+                    <button type="button" class="btn btn-primary fa fa-facebook" style="font-size:100%"></button>
+                    <button type="button" class="btn btn-danger fa fa-google-plus" style="font-size:100%"></button>
+                </div>
+            </div>
             <br>
-            <p ng-bind-html="art.content">
-            </p>
+            <div class="row">
+                <div class="col-md-12">
+                    <img ng-src="{{art.media}}" class="img-responsive imgpost">
+                    <br>
+                    <p ng-bind-html="art.content">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default fa"><span>Share</span></button>
+                        <button type="button" class="btn btn-primary fa fa-facebook"></button>
+                        <button type="button" class="btn btn-danger fa fa-google-plus"></button>
+                        <button type="button" class="btn btn-primary fa fa-thumbs-o-up"> Like it</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row aligntop">
+                <div class="col-md-2">
+                    <img class="img-reponsive user" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="user">
+                </div>
+                <div class="col-md-10">
+                    <h4>name</h4>
+                    <time datetime="">Time</time> <br>
+                    <span>Comment: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque nulla fugit vel! Molestiae voluptate commodi aliquid vero doloribus repudiandae odit optio, at illo sapiente dolores culpa, magnam perspiciatis voluptates facilis!</span>
+
+                </div>
+
+            </div>
+
+            <div ng-repeat="x in article.comments" class="row aligntop">
+                <div class="col-md-2">
+                    <img class="img-reponsive user" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="user">
+                </div>
+                <div class="col-md-10">
+                    <h4>{{x._user.name}}</h4>
+                    <time datetime="">Time</time> <br>
+                    <span>{{x.commentContent}}</span>
+
+                </div>
+
+            </div>
+
+            <!-- Comment -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Leave a reply</h4>
+                    <form ng-submit="addCommentforArticle()">
+                        <div class="form-group">
+                            <textarea ng-model="newComment.commentContent" placeholder="Enter reply" class="form-control" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <!-- End Comment -->
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default fa"><span>Share</span></button>
-                <button type="button" class="btn btn-primary fa fa-facebook"></button>
-                <button type="button" class="btn btn-danger fa fa-google-plus"></button>
-                <button type="button" class="btn btn-primary fa fa-thumbs-o-up"> Like it</button>
+
+        <div class="col-md-4">
+            <h4><span class="themeblue">Có thể bạn quan tâm</span></h4>
+            <div class="media" ng-init="apiGetArts()">
+                <div ng-repeat="art in randomArticles">
+                    <div class="media-body">
+                        <a href="#!/post?id={{art._id}}">
+                            <h4 class="media-heading">{{art.title}}</h4>
+                        </a>
+                        <time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-
-    <!-- Comment -->
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Leave a reply</h4>
-            <form>
-                <div class="form-group">
-                    <textarea placeholder="Enter reply" class="form-control" rows="5"></textarea>
-                </div>
-                <div class="form-group">
-                    <input placeholder="Your ID" type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input placeholder="Your email" type="text" class="form-control">
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox">Keep in touch with the post</label>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-        </div>
-    </div>
-    <!-- End Comment -->
 </div>

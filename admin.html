@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.min.css">
     <link rel="stylesheet" href="/bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css">
     <link rel='stylesheet' href='/bower_components/textAngular/dist/textAngular.css'>
-
+    <link rel="icon" href="https://images.vexels.com/media/users/3/142734/isolated/preview/5fd7e99a39203ca549c70693725fb1c5-camera-lens-marketing-logo-by-vexels.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="Style/Admin.css">
@@ -88,8 +88,8 @@
                             <td>{{getCatNameOfArt(art._category._id)}}</td>
                             <td>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</td>
                             <td>
-                                <a href="" data-toggle="modal" data-target="#edit" ng-click="apiGetArt(art._id)"><span class="label label-primary">Edit</span></a>
-                                <a href="" data-toggle="modal" data-target="#delete" ng-click="getArticleID(art._id)"><span class="label label-danger">Delete</span></a>
+                                <a ng-click="getArticleID(art._id)" href="" data-toggle="modal" data-target="#edit"><span class="label label-primary">Edit</span></a>
+                                <a ng-click="getArticleID(art._id)" href="" data-toggle="modal" data-target="#delete"><span class="label label-danger">Delete</span></a>
                             </td>
 
                         </tr>
@@ -137,10 +137,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="panel-body">
-                        <form ng-submit="submitCreateArticle()">
+                        <form ng-submit="submitCreateArticle()" ng-init="apiGetArt()">
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" class="form-control" ng-model="newArticle.title" placeholder="Title">
+                                <input type="text" class="form-control" ng-model="article.title" placeholder="Title">
                             </div>
                             <div class="form-group">
                                 <label>Author</label>
@@ -148,24 +148,24 @@
                             </div>
                             <div ng-init="apiGetCat()" class="form-group">
                                 <label>Category</label></br>
-                                <select ng-model="newArticle._category" ng-required="true" class="form-control" ng-options="category as category.name for category in categories track by category._id" />
+                                <select ng-model="article._category" ng-required="true" class="form-control" ng-options="category as category.name for category in categories track by category._id" />
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Short Description</label>
-                                <textarea class="form-control" ng-model="newArticle.description" rows="2"></textarea>
+                                <textarea class="form-control" ng-model="article.description" rows="2"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Full Description</label>
-                                <text-angular ng-model="newArticle.content"></text-angular>
+                                <text-angular ng-model="article.content"></text-angular>
                             </div>
                             <div class="form-group">
                                 <label>Media</label>
-                                <input type="text" class="form-control" ng-model="newArticle.media" placeholder="Image, Youtube Link...">
+                                <input type="text" class="form-control" ng-model="article.media" placeholder="Image, Youtube Link...">
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
-                                <tags-input use-strings="true" height='30px' ng-model="newArticle.tags"></tags-input>
+                                <tags-input use-strings="true" height='30px' ng-model="article.tags"></tags-input>
                             </div>
                             <button ng-click="updateArticle()" class="btn btn-primary" type="submit">Update</button>
 
@@ -191,7 +191,7 @@
 <script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
 <script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
 <script src='/bower_components/textAngular/dist/textAngular.min.js'></script>
-
+<script src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'></script>
 
 
 <script src='/Script/script.js'></script>

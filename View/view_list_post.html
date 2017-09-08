@@ -1,0 +1,42 @@
+<div ng-init="getAllArticleinCategories()" class="container topnews">
+    <div class="row">
+
+        <div class="col-md-7" ng-init="apiGetArts()">
+            <div ng-repeat="art in articlesInCategory.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                <div class="news">
+                    <h2 class="media-heading"> <a href="#!/post?id={{art._id}}">{{art.title}}</a></h2>
+                    <a ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></a>
+                    <a href="">By <b>{{art._author.name}}</b></a>
+                    <i><time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time></i>
+                </div>
+                <div class="thumbnail">
+
+                    <a href="#!/post?id={{art._id}}"><img ng-src="{{art.media}}" class="portrait"></a>
+
+                </div>
+                <p class="textdemo">{{art.description}}</p>
+                <a href="#!/post?id={{art._id}}" class="btnblack" ng-click="apiGetArt(art._id)">Đọc tiếp</a>
+                <div class="line"></div>
+            </div>
+            <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" items-per-page="itemsPerPage" boundary-links="true" force-ellipses="true"></ul>
+        </div>
+
+        <div class="col-md-1">
+
+        </div>
+
+        <div class="col-md-4">
+            <h4><span class="themeblue">Tin nóng</span></h4>
+            <div class="media" ng-init="apiGetArts()">
+                <div ng-repeat="art in randomArticles">
+                    <div class="media-body">
+                        <a href="#!/post?id={{art._id}}">
+                            <h4 class="media-heading">{{art.title}}</h4>
+                        </a>
+                        <time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
