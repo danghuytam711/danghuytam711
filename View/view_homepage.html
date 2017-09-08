@@ -4,7 +4,7 @@
             <div ng-repeat="art in articles.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                 <div class="news">
                     <h2 class="media-heading"> <a href="#!/post?id={{art._id}}">{{art.title}}</a></h2>
-                    <a ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></a>
+                    <a><span class="themeblue">{{getCatNameOfArt(art._category._id)}}</span></a>
                     <a href="">By <b>{{art._author.name}}</b></a>
                     <i><time>{{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time></i>
                 </div>
@@ -51,7 +51,7 @@
             <!-- End quotes -->
             <!-- Fact -->
             <h4><span class="themeblue">Tin nóng</span></h4>
-            <div class="media" ng-init="apiGetArts()">
+            <div class="media">
                 <div ng-repeat="art in randomArticles">
                     <div class="media-body">
                         <a href="#!/post?id={{art._id}}">

@@ -32,6 +32,12 @@
 	    $scope.keySearch = "";
 	    myId = "598411b3fd49fb00044fd9b3";
 
+
+	    $scope.isFunction = function(functionToCheck) {
+	        var getType = {};
+	        return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+	    }
+
 	    $scope.apiGetCat = function() {
 	        $http.get(root + "/api/categories")
 	            .then(function(response) {
@@ -54,11 +60,28 @@
 	    //Search Aritcle
 	    $scope.getArticleBySearchKey = function() {
 	        $scope.keyWord = $routeParams._term;
+	        // //console.log($scope.keyWord);
 	        $http.get(root + '/api/articles/search/' + $scope.keyWord)
 	            .then(function successCallbak(response) {
 	                $scope.articleGetByKey = response.data;
+	                //Begin Pagination
+	                $scope.viewby = 5;
+	                $scope.totalItems = $scope.articleGetByKey.length;
+	                $scope.currentPage = 1;
+	                $scope.itemsPerPage = $scope.viewby;
+	                $scope.maxSize = 5;
+	                $scope.setPage = function(pageNo) {
+	                    $scope.currentPage = pageNo;
+	                };
+	                $scope.pageChanged = function() {
+	                    //console.log('Page changed to: ' + $scope.currentPage);
+	                };
+	                $scope.setItemsPerPage = function(num) {
+	                    $scope.itemsPerPage = num;
+	                    $scope.currentPage = 1;
+	                }
 	            }, function errorCallback(response) {
-	                console.log(data, status, headers, config);
+	                //console.log(data, status, headers, config);
 	            });
 	    }
 
@@ -66,7 +89,24 @@
 	        $http.get(root + "/api/articles")
 	            .then(function(response) {
 	                $scope.articles = response.data;
-	                _callback();
+	                //Begin Pagination
+	                $scope.viewby = 5;
+	                $scope.totalItems = $scope.articles.length;
+	                $scope.currentPage = 1;
+	                $scope.itemsPerPage = $scope.viewby;
+	                $scope.maxSize = 5;
+	                $scope.setPage = function(pageNo) {
+	                    $scope.currentPage = pageNo;
+	                };
+	                $scope.pageChanged = function() {
+	                    //console.log('Page changed to: ' + $scope.currentPage);
+	                };
+	                $scope.setItemsPerPage = function(num) {
+	                    $scope.itemsPerPage = num;
+	                    $scope.currentPage = 1;
+	                };
+	                if ($scope.isFunction(_callback))
+	                    _callback();
 	            });
 	    };
 
@@ -98,6 +138,7 @@
 	    };
 
 	    $scope.getAllArticleinCategories = function() {
+	        // console.log('in get all art cate');
 	        $scope.apiGetArts(function() {
 	            $scope.currentCategoryID = $routeParams.id;
 	            $scope.articlesInCategory = [];
@@ -105,6 +146,28 @@
 	                if ($scope.articles[i]._category._id == $scope.currentCategoryID) {
 	                    $scope.articlesInCategory.push($scope.articles[i]);
 	                }
+	            }
+	            //Begin Pagination
+	            // $scope.pagination = {
+	            //     currentPage: 1,
+	            //     maxSize: 21,
+	            //     totalItems: $scope.articlesInCategory.length,
+	            //     maxSize: 5,
+	            // };
+	            $scope.viewby = 5;
+	            $scope.totalItems = $scope.articlesInCategory.length;
+	            $scope.currentPage = 1;
+	            $scope.itemsPerPage = $scope.viewby;
+	            $scope.maxSize = 5;
+	            $scope.setPage = function(pageNo) {
+	                $scope.currentPage = pageNo;
+	            };
+	            $scope.pageChanged = function() {
+	                //console.log('Page changed to: ' + $scope.currentPage);
+	            };
+	            $scope.setItemsPerPage = function(num) {
+	                $scope.itemsPerPage = num;
+	                $scope.currentPage = 1;
 	            }
 	        });
 	    }
@@ -130,7 +193,10 @@
 	    //Begin get my articles 
 	    $scope.getMyArticles = function() {
 	        $scope.currentMyID = myId;
-	        $scope.articlesByMe = getArticlesByMe($scope.currentMyID);
+	        // console.log("in my art");
+	        $scope.apiGetArts(function() {
+	            $scope.articlesByMe = getArticlesByMe($scope.currentMyID);
+	        });
 	    }
 
 	    var getArticlesByMe = function(id, maximumArticle) {
@@ -142,13 +208,13 @@
 	            }
 	        }
 	        var articles = [];
+	        //console.log($scope.articles[0])
 	        angular.forEach($scope.articles, function(value, key) {
-	            if (value._author._id === id && articles.length < maximumArticle) {
+	            if (value._author._id === id) {
 	                articles.push(value);
 	            }
 	        });
 	        return articles;
-
 	    };
 
 
@@ -163,7 +229,7 @@
 	                    $scope.category.name = "";
 	                    $scope.category.description = "";
 	                }, function errorCallback(response) {
-	                    // console.log(data, status, headers, config);
+	                    // //console.log(data, status, headers, config);
 	                });
 	        } else {
 	            alert("Input invalid");
@@ -171,6 +237,7 @@
 	    }
 
 	    $scope.getCatNameOfArt = function(id) {
+	        //console.log(id);
 	        if (undefined != $scope.categories) {
 	            for (i = 0; i < $scope.categories.length; i++) {
 	                var cat = $scope.categories[i];
@@ -184,12 +251,15 @@
 	    // Comment
 	    $scope.addCommentforArticle = function() {
 	        $scope.newComment._user = $scope.user;
-	        $http.put(root + '/api/article/comment/' + $scope.article._id, $scope.newComment)
+	        //console.log($scope.user);
+	        //console.log($scope.newComment);
+	        $http.put(root + '/api/article/comment/' + $scope.art._id, $scope.newComment)
 	            .then(function successCallbak(response) {
-	                $scope.article = response.data;
-	                // console.log(response.data);
+	                $scope.art = response.data;
+	                //console.log($scope.art.comments);
+	                // //console.log(response.data);
 	            }, function errorCallback(response) {
-	                // console.log(data, status, headers, config);
+	                //console.log("failed")
 	            });
 	    }
 
@@ -197,7 +267,6 @@
 	    $scope.getArticleID = function(id) {
 	        angular.forEach($scope.articles, function(value, key) {
 	            if (value._id === id) {
-
 	                $scope.article = value;
 	                return false;
 	            }
@@ -213,7 +282,7 @@
 	                alert("Thành công");
 	                // window.location.href = 'admin.html';
 	            }, function errorCallback(response) {
-	                // console.log(data, status, headers, config);
+	                // //console.log(data, status, headers, config);
 	            });
 	    };
 
@@ -225,7 +294,7 @@
 	                window.location.href = 'admin.html';
 	                alert("Update Success");
 	            }, function errorCallback(response) {
-	                // console.log(data, status, headers, config);
+	                // //console.log(data, status, headers, config);
 	            });
 	    };
 
@@ -237,7 +306,7 @@
 	                // alert("failfgf");
 	                window.location.href = '/admin_cat.html#/';
 	            }, function errorCallback(response) {
-	                // console.log(data, status, headers, config);
+	                // //console.log(data, status, headers, config);
 	                // alert("failfgf");
 	            });
 	    };
@@ -245,10 +314,10 @@
 	    $scope.deleteArticle = function() {
 	        $http.delete(root + '/api/articles/' + $scope.article._id)
 	            .then(function successCallback(response) {
-	                console.log('You have already deleted the articles')
+	                //console.log('You have already deleted the articles')
 	                window.location.href = '/admin.html#/listArticles';
 	            }, function errorCallback(response) {
-	                // console.log(data, status, headers, config);
+	                // //console.log(data, status, headers, config);
 	            });
 	    };
 
@@ -265,22 +334,6 @@
 	                    listArticles.splice(random, 1);
 	                };
 	            };
-	            //Begin Pagination
-	            $scope.viewby = 5;
-	            $scope.totalItems = newArticles.length;
-	            $scope.currentPage = 1;
-	            $scope.itemsPerPage = $scope.viewby;
-	            $scope.maxSize = 5;
-	            $scope.setPage = function(pageNo) {
-	                $scope.currentPage = pageNo;
-	            };
-	            $scope.pageChanged = function() {
-	                console.log('Page changed to: ' + $scope.currentPage);
-	            };
-	            $scope.setItemsPerPage = function(num) {
-	                $scope.itemsPerPage = num;
-	                $scope.currentPage = 1;
-	            }
 	        }
 
 	        // dynamic
@@ -290,19 +343,16 @@
 
 	    $scope.login = function() {
 	        $http.post(root + '/api/users/auth', $scope.user)
-	            .success(function(response) {
-	                var isSuccess = response.success;
+	            .then(function successCallbak(response) {
+	                var isSuccess = response.data.success;
 	                if (isSuccess) {
-	                    console.log(response);
+	                    //console.log(response);
+	                    $scope.user = response.data.user;
 	                } else {
-
-	                    alert(response.message);
+	                    $scope.user = null;
+	                    //console.log(response);
+	                    //console.log(response.data.message);
 	                }
-	            }).error(function(data, status, headers, config) {
-	                console.log(data, status, headers, config);
 	            });
 	    };
-
-
-
 	});

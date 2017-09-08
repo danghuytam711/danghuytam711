@@ -20,8 +20,8 @@
 <body ng-app="app" ng-controller="mainController">
     <div class="container-fluid text">
         <a href="index.html" style="text-decoration:none">
-            <h1 style="text-align:center">TRONG VEO</h1>
-            <h4 style="text-align:center">Cuộc sống giản đơn</h4>
+            <h1 class="head-logo">TRONG VEO</h1>
+            <h4 class="head-logo">Cuộc sống giản đơn</h4>
         </a>
     </div>
 
@@ -30,7 +30,7 @@
             <div class="container">
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="#">Home</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/">Categories<span class="caret"></span></a>
+                    <li class="dropdown"><a class="dropdown-toggle pointer" data-toggle="dropdown">Categories<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a ng-repeat="cat in categories" href="#!/list?id={{cat._id}}">{{cat.name}}</a></li>
                         </ul>
@@ -40,14 +40,16 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li> <a href="" data-toggle="modal" data-target="#myModal">Sign in </a></li>
                     <li> <a href="admin.html">Admin</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/">Search<span class="caret"></span></a>
+                    <li class="dropdown"><a class="dropdown-toggle pointer" data-toggle="dropdown">Search<span class="caret"></span></a>
                         <form class="navbar-form  formcontrol dropdown-menu">
                             <div class="form-group">
                                 <input ng-model="keySearch" type="text" class="form-control" placeholder="Search">
                             </div>
-                            <button type="submit" class="btn btn-default">
-                                <a href="#!search/{{keySearch}}"><i class="glyphicon glyphicon-search"></i></a>
-                            </button>
+                            <a href="#!search/{{keySearch}}">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </a>
                         </form>
                     </li>
 

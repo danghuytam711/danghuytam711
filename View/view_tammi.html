@@ -1,19 +1,49 @@
 <div ng-init="getMyArticles()" class="container topnews">
     <div class="row">
-        <div ng-repeat="x in articlesByMe">
-            <a ng-init="apiGetCat()"><span class="themeblue">{{getCatNameOfArt(x._category._id)}}</span></a>
-            <div class="">
-                <img ng-src="{{x.media}}" alt="img">
+
+        <div class="col-md-7">
+            <div ng-repeat="x in articlesByMe">
+                <a><span class="themeblue">{{getCatNameOfArt(x._category._id)}}</span></a>
+                <div class="thumbnail">
+                    <a href="#!/post?id={{x._id}}"><img ng-src="{{x.media}}" class="portrait"></a>
+                </div>
+                <div>
+                    <h2 class="media-heading"> <a href="#!/post?id={{art._id}}">{{x.title}}</a></h2>
+                </div>
+                <a href="">
+                    <b>{{x.author}}</b>
+                </a>
+                <time>{{x.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
+                <p class="textdemo">{{x.description}}</p>
+                <a href="#!/post?id={{x._id}}" class="btnblack" ng-click="apiGetArt(x._id)">Đọc tiếp</a>
             </div>
-            <div>
-                <h2>{{x.title}}</h2>
-            </div>
-            <a href="">
-                <b>{{x.author}}</b>
-            </a>
-            <time>{{x.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time>
-            <p class="textdemo">{{x.description}}</p>
-            <a href="#!/post?id={{x._id}}" class="btnblack" ng-click="apiGetArt(x._id)">Đọc tiếp</a>
         </div>
+
+        <div class="col-md-1">
+        </div>
+
+        <div class="col-md-4">
+            <h4><span class="themeblue">Câu nói yêu thích</span></h4>
+
+
+            <blockquote class="quote-box img-responsive">
+                <p class="quotation-mark">
+                    “
+                </p>
+                <p class="quote-text">
+                    Khó quá cho qua
+                </p>
+                <hr>
+                <div class="blog-post-actions">
+                    <p class="blog-post-bottom pull-left">
+                        Tammi
+                    </p>
+                    <p class="blog-post-bottom pull-right">
+                        <span class="badge quote-badge">59</span>  ❤
+                    </p>
+                </div>
+            </blockquote>
+        </div>
+
     </div>
 </div>

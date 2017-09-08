@@ -2,18 +2,12 @@
     <div class="row">
         <div class="col-md-8">
 
-            <h4 ng-init="apiGetCat()"><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
+            <h4><span class="themeblack">{{getCatNameOfArt(art._category)}}</span></h4>
             <h2>{{art.title}}</h2>
             <small><i>By</i></small>
             <a href=""><b>{{art._author.name}}</b></a>
             <time datetime="">- {{art.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time> &nbsp&nbsp
-            <div class="row">
-                <div class="col-md-12">
-                    <i>Share</i>
-                    <button type="button" class="btn btn-primary fa fa-facebook" style="font-size:100%"></button>
-                    <button type="button" class="btn btn-danger fa fa-google-plus" style="font-size:100%"></button>
-                </div>
-            </div>
+
             <br>
             <div class="row">
                 <div class="col-md-12">
@@ -34,26 +28,14 @@
                 </div>
             </div>
             <hr>
-            <div class="row aligntop">
-                <div class="col-md-2">
-                    <img class="img-reponsive user" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="user">
-                </div>
-                <div class="col-md-10">
-                    <h4>name</h4>
-                    <time datetime="">Time</time> <br>
-                    <span>Comment: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque nulla fugit vel! Molestiae voluptate commodi aliquid vero doloribus repudiandae odit optio, at illo sapiente dolores culpa, magnam perspiciatis voluptates facilis!</span>
-
-                </div>
-
-            </div>
-
-            <div ng-repeat="x in article.comments" class="row aligntop">
+            <!-- Show Comments -->
+            <div ng-repeat="x in art.comments" class="row aligntop">
                 <div class="col-md-2">
                     <img class="img-reponsive user" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" alt="user">
                 </div>
                 <div class="col-md-10">
                     <h4>{{x._user.name}}</h4>
-                    <time datetime="">Time</time> <br>
+                    <time datetime="">{{x.createdDate | date:'HH:mm, dd-MM-yyyy'}}</time> <br>
                     <span>{{x.commentContent}}</span>
 
                 </div>
@@ -77,7 +59,7 @@
 
         <div class="col-md-4">
             <h4><span class="themeblue">Có thể bạn quan tâm</span></h4>
-            <div class="media" ng-init="apiGetArts()">
+            <div class="media">
                 <div ng-repeat="art in randomArticles">
                     <div class="media-body">
                         <a href="#!/post?id={{art._id}}">
